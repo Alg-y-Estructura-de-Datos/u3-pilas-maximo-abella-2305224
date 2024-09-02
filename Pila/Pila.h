@@ -2,6 +2,7 @@
 #define U03_PILAS_PILA_PILA_H_
 
 #include "nodo.h"
+#include <iostream>
 
 /**
  * Clase que implementa una Pila generica, ya que puede
@@ -96,5 +97,24 @@ bool Pila<T>::esVacia()
 {
   return tope == nullptr;
 }
+
+template<class T>
+void mostrarPila(Pila<T>& pila) {
+    Pila<T> pilaAux;
+
+    // Desapilar elementos para mostrar sin perderlos
+    while (!pila.esVacia()) {
+        int valor = pila.pop();
+        std::cout << valor << " ";
+        pilaAux.push(valor);
+    }
+    std::cout << std::endl;
+
+    // Restaurar la pila original
+    while (!pilaAux.esVacia()) {
+        pila.push(pilaAux.pop());
+    }
+}
+
 
 #endif // U03_PILAS_PILA_PILA_H_
